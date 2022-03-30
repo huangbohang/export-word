@@ -1,7 +1,7 @@
 # export-word.js  
 一个html导出为word的js库   
 
-## [example](https://huangbohang.github.io/export-word/examples/?_blank)  {:target="_blank"}
+## [example](https://huangbohang.github.io/export-word/examples)
 
 ## Install  
     npm install -D export-word
