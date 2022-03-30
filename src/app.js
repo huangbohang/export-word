@@ -5,6 +5,7 @@ import wordexport from './wordexport'
 class App {
   constructor(wordDom, _config = {}) {
     const defaultConfig = {
+      addStyle: true,
       fileName: new Date().toLocaleString(),
       maxWidth: 624,
       toImg: '',
@@ -18,7 +19,7 @@ class App {
 
   async init() {
     // 将所有样式转换为行内样式
-    this.sheetToSelf(this.c_dom)
+    this.config.addStyle && this.sheetToSelf(this.c_dom)
     // 将所有图片转化为base64
     await this.sheetToImg()
     // 将带有对应class名字dom转化为图片
@@ -54,7 +55,6 @@ class App {
   }
   sheetToSelf(dom) {
     const sheets = document.styleSheets
-    const sheetsArry = Array.from(sheets)
     const $dom = dom
 
     function cssTextToJSON(cssText) {
@@ -67,9 +67,15 @@ class App {
       })
       return obj
     }
+    for (let i = 0, l = sheets.length; i < l; i++) {
+      try {
+        sheets[i].rules || sheets[i].cssRules
+      } catch (e) {
+        console.warn("Can't read the css rules of: " + sheets[i].href, e)
+        continue
+      }
 
-    sheetsArry.forEach((sheetContent) => {
-      const { rules, cssRules } = sheetContent
+      const { rules, cssRules } = sheets[i]
       const rulesArry = Array.from(rules || cssRules || [])
       rulesArry.forEach((rule) => {
         const { selectorText, style } = rule
@@ -95,7 +101,7 @@ class App {
           }
         }
       })
-    })
+    }
   }
   imgStyleReset(dom, coverDom) {
     const { maxWidth } = this.config

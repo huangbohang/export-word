@@ -866,6 +866,7 @@ var exportWord = (function (saveAs, html2canvas) {
       _classCallCheck(this, App);
 
       var defaultConfig = {
+        addStyle: true,
         fileName: new Date().toLocaleString(),
         maxWidth: 624,
         toImg: '',
@@ -886,7 +887,7 @@ var exportWord = (function (saveAs, html2canvas) {
               switch (_context.prev = _context.next) {
                 case 0:
                   // 将所有样式转换为行内样式
-                  this.sheetToSelf(this.c_dom); // 将所有图片转化为base64
+                  this.config.addStyle && this.sheetToSelf(this.c_dom); // 将所有图片转化为base64
 
                   _context.next = 3;
                   return this.sheetToImg();
@@ -1016,7 +1017,6 @@ var exportWord = (function (saveAs, html2canvas) {
     }, {
       key: "exportWord",
       value: function exportWord() {
-        console.log(this.config.fileName);
         saveAs__default["default"](wordexport(this.c_dom), this.config.fileName + '.doc');
         this.config.success();
       }
@@ -1024,7 +1024,6 @@ var exportWord = (function (saveAs, html2canvas) {
       key: "sheetToSelf",
       value: function sheetToSelf(dom) {
         var sheets = document.styleSheets;
-        var sheetsArry = Array.from(sheets);
         var $dom = dom;
 
         function cssTextToJSON(cssText) {
@@ -1040,9 +1039,17 @@ var exportWord = (function (saveAs, html2canvas) {
           return obj;
         }
 
-        sheetsArry.forEach(function (sheetContent) {
-          var rules = sheetContent.rules,
-              cssRules = sheetContent.cssRules;
+        for (var i = 0, l = sheets.length; i < l; i++) {
+          try {
+            sheets[i].rules || sheets[i].cssRules;
+          } catch (e) {
+            console.warn("Can't read the css rules of: " + sheets[i].href, e);
+            continue;
+          }
+
+          var _sheets$i = sheets[i],
+              rules = _sheets$i.rules,
+              cssRules = _sheets$i.cssRules;
           var rulesArry = Array.from(rules || cssRules || []);
           rulesArry.forEach(function (rule) {
             var selectorText = rule.selectorText,
@@ -1056,12 +1063,12 @@ var exportWord = (function (saveAs, html2canvas) {
                     var oldCssText = cssTextToJSON(dom.style.cssText);
                     var newCssText = cssTextToJSON(style.cssText);
 
-                    for (var i in newCssText) {
-                      oldCssText[i] = newCssText[i];
+                    for (var _i in newCssText) {
+                      oldCssText[_i] = newCssText[_i];
                     }
 
-                    for (var _i in oldCssText) {
-                      dom.style[_i] = oldCssText[_i];
+                    for (var _i2 in oldCssText) {
+                      dom.style[_i2] = oldCssText[_i2];
                     }
                   } else {
                     dom.style.cssText = style.cssText;
@@ -1072,7 +1079,7 @@ var exportWord = (function (saveAs, html2canvas) {
               }
             }
           });
-        });
+        }
       }
     }, {
       key: "imgStyleReset",
