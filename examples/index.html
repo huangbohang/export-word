@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.1/echarts.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="../dist/export-word.min.js"></script>
+    <style>
+        .main{
+            width:800px;
+            margin: auto;
+        }
+        .bs-example-bg-classes p {
+            padding: 15px;
+        }
+        #echart-block{
+            width: 500px;
+            height: 300px;
+        }
+        button{
+            position: fixed;
+            left: 0;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main ">
+            <h1>h1. Bootstrap heading</h1>
+            <h2>h2. Bootstrap heading</h2>
+            <h3>h3. Bootstrap heading</h3>
+            <h4>h4. Bootstrap heading</h4>
+            <h5>h5. Bootstrap heading</h5>
+            <h6>h6. Bootstrap heading</h6>
+            For example, <code>&lt;section&gt;</code> should be wrapped as inline.
+    
+            <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient
+                montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+    
+                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper
+                nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
+                lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+    
+                Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget
+                metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+            <h1>echart图表</h1>
+            <div id="echart-block" class="need-to-img"></div>
+            <div class="bs-example bs-example-bg-classes" data-example-id="contextual-backgrounds-helpers">
+                <p class="bg-primary"> Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                <p class="bg-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+                <p class="bg-info">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                <p class="bg-warning">Etiam porta sem malesuada magna mollis euismod.</p>
+                <p class="bg-danger">Donec ullamcorper nulla non metus auctor fringilla.</p>
+            </div>
+            <img src="./chelizi.jpg" alt="..." class="img-rounded">
+            <img src="./chelizi.jpg" alt="..." class="img-circle">
+            <img src="./chelizi.jpg" alt="..." class="img-thumbnail">
+            <h1>table</h1>
+            <div class="need-to-img">
+                <table class="table " >
+                    <tr>
+                        <th>日期</th>
+                        <th>姓名</th>
+                        <th>地址</th>
+                    </tr>
+                    <tr>
+                        <td>2016-05-02</td>
+                        <td>王小虎</td>
+                        <td>上海市普陀区金沙江路 1518 弄'</td>
+                    </tr>
+                    <tr>
+                        <td>2016-03-21</td>
+                        <td>张小花</td>
+                        <td>上海市普陀区金沙江路 1512 弄'</td>
+                    </tr>
+                    <tr>
+                        <td>2016-01-4</td>
+                        <td>李晓东</td>
+                        <td>上海市普陀区金沙江路 1513 弄'</td>
+                    </tr>
+                    <tr>
+                        <td>2016-04-02</td>
+                        <td>王大哈</td>
+                        <td>上海市普陀区金沙江路 1522 弄'</td>
+                    </tr>
+                    <tr>
+                        <td>2016-05-12</td>
+                        <td>李晓春</td>
+                        <td>上海市普陀区金沙江路 1518 弄'</td>
+                    </tr>
+                </table> 
+            </div>
+           
+    </div>
+    <button type="button" class="btn btn-primary">download</button>
+
+    <script>
+        var myChart = echarts.init(document.getElementById('echart-block'));
+        // 绘制图表
+        myChart.setOption({
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            xAxis: {
+                data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        });
+    </script>
+    <script>
+        const wrap = document.querySelector('.main')
+        document.getElementsByTagName('button')[0].onclick = function(){
+        
+           exportWord(wrap,{
+              fileName:'测试文件',
+              toImg:['.need-to-img','.bg-danger']
+          })
+      }
+        
+
+ 
+    </script>
+</body>
+</html>
