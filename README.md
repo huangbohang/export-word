@@ -10,7 +10,7 @@
   
 ```javascript    
 
-import exportWord FROM 'export-word'
+import exportWord from 'export-word'
 
 const wrap = document.getElementById('test')
 const config = {
