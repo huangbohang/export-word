@@ -1,7 +1,11 @@
 {
-  "name": "export-word",
-  "version": "1.0.0",
-  "description": "export-word",
+  "name": "js-export-word",
+  "version": "1.0.3",
+  "description": "js-export-word",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huangbohang/export-word"
+  },
   "keywords": [
     "export-word",
     "导出word",

@@ -1,16 +1,16 @@
-# export-word.js  
+# js-export-word 
 一个html导出为word的js库   
 
 ## [example](https://huangbohang.github.io/export-word/examples)
 
 ## Install  
-    npm install -D export-word
+    npm install -D js-export-word
 
 ## Usage     
   
 ```javascript    
 
-import exportWord from 'export-word'
+import exportWord from 'js-export-word'
 
 const wrap = document.getElementById('test')
 const config = {
