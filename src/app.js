@@ -35,7 +35,7 @@ class App {
   }
   async domToCanvas() {
     const str = this.config.toImg
-    if (str === '') {
+    if (!str.length) {
       return
     }
     const canvas_doms = this.dom.querySelectorAll(str)
