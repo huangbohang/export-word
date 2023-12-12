@@ -966,7 +966,7 @@ var exportWord = (function (saveAs, html2canvas) {
                 case 0:
                   str = this.config.toImg;
 
-                  if (!(str === '')) {
+                  if (str.length) {
                     _context3.next = 3;
                     break;
                   }

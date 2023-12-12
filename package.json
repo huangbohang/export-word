@@ -16,6 +16,7 @@
   ],
   "main": "src/main.js",
   "scripts": {
+    "serve": "cross-env ENV=development rollup -c -w",
     "build": "rollup --config"
   },
   "author": "huangbohang",
@@ -33,6 +34,7 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.1.3",
+    "cross-env": "^7.0.3",
     "eslint": "^8.11.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-html": "^6.2.0",
@@ -41,6 +43,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "rollup": "^2.70.1",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-serve": "^2.0.2",
     "rollup-plugin-terser": "^7.0.2"
   }
 }
